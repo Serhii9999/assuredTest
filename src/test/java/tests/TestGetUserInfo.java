@@ -6,9 +6,12 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
-import static pages.Pages.*;
-import static org.hamcrest.Matchers.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItems;
+import static pages.Pages.firstUserPage;
+import static pages.Pages.secondUserPage;
+
 public class TestGetUserInfo {
 
 
@@ -30,7 +33,7 @@ public class TestGetUserInfo {
     public void testFewNamesToContain() {
         given().get(firstUserPage).then().
                 statusCode(200)
-                .body("data.first_name", hasItems("George","Janet", "Emma"));
+                .body("data.first_name", hasItems("George", "Janet", "Emma"));
     }
 
 
@@ -47,6 +50,7 @@ public class TestGetUserInfo {
                 .extract().jsonPath().getList("data", UserModel.class);
         assertThat(list).extracting(UserModel::getFirstName).doesNotContain("Kevin");
     }
+
     @Test
     public void testUserIdsToExist() {
         List<UserModel> list = given().get(firstUserPage).then().statusCode(200)
@@ -70,17 +74,18 @@ public class TestGetUserInfo {
         assertThat(list).extracting(UserModel::getEmail).contains("charles.morris@reqres.in");
         assertThat(list).extracting(UserModel::getEmail).contains("tracey.ramos@reqres.in");
     }
-        @Test
-        public void testUserFirstNamesToExist() {
-            List<UserModel> list = given().get(firstUserPage).then().statusCode(200)
-                    .extract().jsonPath().getList("data", UserModel.class);
-            assertThat(list).extracting(UserModel::getFirstName).contains("George");
-            assertThat(list).extracting(UserModel::getFirstName).contains("Janet");
-            assertThat(list).extracting(UserModel::getFirstName).contains("Emma");
-            assertThat(list).extracting(UserModel::getFirstName).contains("Eve");
-            assertThat(list).extracting(UserModel::getFirstName).contains("Charles");
-            assertThat(list).extracting(UserModel::getFirstName).contains("Tracey");
-        }
+
+    @Test
+    public void testUserFirstNamesToExist() {
+        List<UserModel> list = given().get(firstUserPage).then().statusCode(200)
+                .extract().jsonPath().getList("data", UserModel.class);
+        assertThat(list).extracting(UserModel::getFirstName).contains("George");
+        assertThat(list).extracting(UserModel::getFirstName).contains("Janet");
+        assertThat(list).extracting(UserModel::getFirstName).contains("Emma");
+        assertThat(list).extracting(UserModel::getFirstName).contains("Eve");
+        assertThat(list).extracting(UserModel::getFirstName).contains("Charles");
+        assertThat(list).extracting(UserModel::getFirstName).contains("Tracey");
+    }
 
     @Test
     public void testUserLastNamesToExist() {
@@ -107,5 +112,5 @@ public class TestGetUserInfo {
     }
 
 
-    }
+}
 

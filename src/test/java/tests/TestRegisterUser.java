@@ -21,7 +21,6 @@ public class TestRegisterUser {
         assertThat(request).isNotNull().extracting(UserRequest::getLastName).isEqualTo("Petrov");
         assertThat(request).isNotNull().extracting(UserRequest::getEmail).isEqualTo("123@gmail.com");
 
-
     }
 
     @Test
@@ -30,10 +29,8 @@ public class TestRegisterUser {
 
     }
 
-
     @Test
     public void testRegisterUserUnsuccessful() {
-
 
         given().contentType(ContentType.JSON).body(wrongEmail).when().post("https://reqres.in/api/register").then().statusCode(400)
                 .contentType(ContentType.JSON);

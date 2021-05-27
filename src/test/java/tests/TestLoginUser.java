@@ -10,7 +10,7 @@ public class TestLoginUser {
 
     final String rightCreds = "{\"email\": \"eve.holt@reqres.in\", \"password\": \"cityslicka\"}";
     final String wrongCreds = "{\"email\": \"345@gmail.com\", \"password\": \"12345\"}";
-    final String wrongLogin = "{\"email\": \"peter@klaven\"}";
+
 
     @Test
     public void testLoginSuccessful() {
@@ -33,7 +33,6 @@ public class TestLoginUser {
 
     @Test
     public void testUnsuccessfulLogin() {
-
 
         given().contentType(ContentType.JSON).body(wrongCreds).when().post("https://reqres.in/api/login").then()
                 .statusCode(400)
