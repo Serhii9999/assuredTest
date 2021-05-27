@@ -8,7 +8,7 @@ import utils.DateDeserialiser;
 import java.time.LocalDateTime;
 
 @Data
-public class CreateUserResponse {
+public class UserResponse {
     private String name;
     private String job;
     private int id;

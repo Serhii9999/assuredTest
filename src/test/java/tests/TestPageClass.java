@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static pages.Pages.*;
 
-public class TestClass {
+public class TestPageClass {
 
 
     @Test
@@ -34,7 +34,7 @@ public class TestClass {
     }
 
     @Test
-    public void testfailToGetAbsentPage() {
+    public void testFailToGetAbsentPage() {
         given().get(absentPage).then().statusCode(404);
     }
 
