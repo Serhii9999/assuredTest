@@ -5,6 +5,7 @@ import model.UserRequest;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
 
 
 
@@ -35,6 +36,9 @@ public class TestRegisterUser {
         given().contentType(ContentType.JSON).body(wrongEmail).when().post("https://reqres.in/api/register").then().statusCode(400)
                 .contentType(ContentType.JSON);
     }
+
+
+
 
 
 
